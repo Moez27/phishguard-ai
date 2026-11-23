@@ -1,0 +1,78 @@
+PhishGuard AI — test results
+Generated: 2026-11-23 14:39 UTC · Python 3.12.10 · MINGW64_NT-10.0-19045
+Command: pytest -v --cov=config --cov=ml --cov=services --cov=database --cov=components --cov=scripts --cov=pages
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\Moez\Downloads\Erij Python Project
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0, platformdirs-4.14.8, cov-7.1.0
+collected 210 items
+
+tests\test_app_smoke.py .........                                        [  4%]
+tests\test_dataset.py ......                                             [  7%]
+tests\test_email_analyzer.py .............                               [ 13%]
+tests\test_evaluation.py ......                                          [ 16%]
+tests\test_history_browse.py ...............................             [ 30%]
+tests\test_leakage_controls.py .....                                     [ 33%]
+tests\test_preprocess.py .........                                       [ 37%]
+tests\test_repository.py ..........                                      [ 42%]
+tests\test_risk_engine.py ....................                           [ 51%]
+tests\test_security.py ..................                                [ 60%]
+tests\test_settings.py .............                                     [ 66%]
+tests\test_system_status.py ....                                         [ 68%]
+tests\test_train_predict.py ......                                       [ 71%]
+tests\test_ui_components.py .......                                      [ 74%]
+tests\test_url_analyzer.py .......................                       [ 85%]
+tests\test_validation.py ..............................                  [100%]
+
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name                         Stmts   Miss  Cover
+------------------------------------------------
+components\__init__.py           0      0   100%
+components\cards.py             14      0   100%
+components\charts.py            69      0   100%
+components\results.py           57      8    86%
+components\state.py             13      0   100%
+components\theme.py             38      0   100%
+config\__init__.py               0      0   100%
+config\settings.py              80      2    98%
+database\__init__.py             0      0   100%
+database\db.py                  23      0   100%
+database\repository.py         164      2    99%
+ml\__init__.py                   0      0   100%
+ml\dataset.py                  134     14    90%
+ml\predict.py                   73      9    88%
+ml\preprocess.py               116      6    95%
+ml\train.py                    145     18    88%
+pages\about.py                  24      0   100%
+pages\dashboard.py              65      0   100%
+pages\email_analysis.py         52     10    81%
+pages\history.py                93     38    59%
+pages\model_evaluation.py       96      0   100%
+pages\url_analysis.py           41      4    90%
+scripts\__init__.py              0      0   100%
+scripts\evaluate_engine.py      82      3    96%
+scripts\prepare_data.py         42      3    93%
+scripts\seed_demo.py            41      5    88%
+services\__init__.py             0      0   100%
+services\analysis.py            52      4    92%
+services\email_analyzer.py     131      5    96%
+services\evaluation.py          26      0   100%
+services\examples.py             3      0   100%
+services\history.py             17      0   100%
+services\indicators.py          43      0   100%
+services\reports.py             46      0   100%
+services\risk_engine.py         78      1    99%
+services\signals.py             31      0   100%
+services\system_status.py       50      2    96%
+services\url_analyzer.py       127      4    97%
+services\validation.py          77      1    99%
+------------------------------------------------
+TOTAL                         2143    139    94%
+============================ 210 passed in 25.81s =============================
+
+Lint: All checks passed!

@@ -1,0 +1,11 @@
+# PhishGuard AI — runtime dependencies
+# Target interpreter: Python 3.12 (3.11 also supported)
+streamlit>=1.45,<2.0
+scikit-learn>=1.5,<2.0
+pandas>=2.2,<4.0
+numpy>=1.26,<3.0
+plotly>=5.24,<7.0
+beautifulsoup4>=4.12,<5.0
+joblib>=1.4,<2.0
+tldextract>=5.1,<6.0
+python-dotenv>=1.0,<2.0

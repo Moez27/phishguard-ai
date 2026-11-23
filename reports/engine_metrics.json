@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-11-23T14:17:42+00:00",
+  "model_version": "20261123-141729",
+  "n_test": 1506,
+  "settings": {
+    "ml_weight": 0.5,
+    "suspect_threshold": 0.4,
+    "phishing_threshold": 0.7
+  },
+  "verdict_matrix": {
+    "rows": [
+      "true legitimate",
+      "true phishing"
+    ],
+    "columns": [
+      "legitimate",
+      "suspect",
+      "phishing"
+    ],
+    "matrix": [
+      [
+        799,
+        19,
+        0
+      ],
+      [
+        19,
+        271,
+        398
+      ]
+    ]
+  },
+  "engine_phishing_verdict": {
+    "precision": 1.0,
+    "recall": 0.5784883720930233,
+    "f1": 0.7329650092081031,
+    "false_positive_rate": 0.0
+  },
+  "engine_flagged": {
+    "precision": 0.9723837209302325,
+    "recall": 0.9723837209302325,
+    "f1": 0.9723837209302325,
+    "false_positive_rate": 0.023227383863080684
+  },
+  "model_only_at_0_5": {
+    "precision": 0.9897959183673469,
+    "recall": 0.9869186046511628,
+    "f1": 0.9883551673944687,
+    "false_positive_rate": 0.008557457212713936
+  },
+  "roc_auc": {
+    "engine_score": 0.9962880963211463,
+    "model_probability": 0.9992821402172058,
+    "rule_score": 0.8847364175243077
+  },
+  "mean_rule_score": {
+    "legitimate": 0.03129883863080684,
+    "phishing": 0.4295595526235465
+  },
+  "seconds_per_email": 0.005254391102257605,
+  "scope_note": "The processed dataset keeps only the subject and body (headers and attachments are removed to avoid leakage), so sender-spoofing and attachment indicators cannot fire here: the rules are evaluated on content and link indicators only."
+}

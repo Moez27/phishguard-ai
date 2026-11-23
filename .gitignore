@@ -1,0 +1,45 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Virtual environment ---
+.venv/
+venv/
+
+# --- Secrets / local config ---
+.env
+.streamlit/secrets.toml
+
+# --- Datasets (never commit raw email corpora) ---
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# --- Local analysis history (may contain user-submitted data) ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Trained model binaries (regenerate with ml/train.py) ---
+models/*.joblib
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Local tooling ---
+.claude/
+*.db-journal
+*.db-wal
+*.db-shm
