@@ -7,6 +7,7 @@ tooltips on every mark, legend for >= 2 series, text in neutral ink.
 
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
@@ -23,6 +24,18 @@ from components.theme import (
 )
 
 VERDICT_ORDER = ("legitimate", "suspect", "phishing")
+
+
+def _count_axis(max_count: float) -> dict:
+    """Axis settings for counts: whole numbers only.
+
+    With small counts Plotly picks half steps (0, 0.5, 1 ...) which the integer
+    format then shows as duplicated labels (0, 1, 1, 2, 2); force a step of 1.
+    """
+    axis = {"rangemode": "tozero", "tickformat": ",d"}
+    if max_count <= 8:
+        axis["dtick"] = 1
+    return axis
 
 
 def _base_layout(fig: go.Figure, height: int = 300) -> go.Figure:
@@ -100,7 +113,8 @@ def activity_over_time(activity: pd.DataFrame) -> go.Figure:
         )
     _base_layout(fig, height=300)
     fig.update_layout(barmode="stack", hovermode="x unified")
-    fig.update_yaxes(rangemode="tozero", tickformat=",d", title_text="Analyses")
+    daily_max = activity.groupby("day")["count"].sum().max() if not activity.empty else 0
+    fig.update_yaxes(title_text="Analyses", **_count_axis(daily_max))
     fig.update_xaxes(showgrid=False, tickformat="%d %b")
     if not activity.empty:
         days = pd.to_datetime(activity["day"])
@@ -131,7 +145,8 @@ def risk_distribution(
             xanchor="left", yanchor="top", xshift=4, font={"color": TEXT_MUTED, "size": 11},
         )  # fmt: skip
     fig.update_xaxes(range=[0, 1], tickformat=".0%", title_text="Risk score", showgrid=False)
-    fig.update_yaxes(rangemode="tozero", tickformat=",d", title_text="Analyses")
+    bins = np.histogram(values, bins=20, range=(0, 1.0001))[0] if values else [0]
+    fig.update_yaxes(title_text="Analyses", **_count_axis(max(bins)))
     return fig
 
 
@@ -154,7 +169,7 @@ def top_indicators(items: list[tuple[str, int]]) -> go.Figure:
     )
     _base_layout(fig, height=max(220, 36 * len(items) + 40))
     fig.update_yaxes(autorange="reversed", showgrid=False)
-    fig.update_xaxes(rangemode="tozero", range=[0, max(values + [1]) * 1.2], tickformat=",d")
+    fig.update_xaxes(range=[0, max(values + [1]) * 1.2], **_count_axis(max(values + [0])))
     return fig
 
 

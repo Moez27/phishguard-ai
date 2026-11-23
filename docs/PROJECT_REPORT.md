@@ -27,7 +27,7 @@ The architecture is detailed in [ARCHITECTURE.md](ARCHITECTURE.md).
 - **Legitimate emails:** the SpamAssassin Public Corpus `easy_ham`, `easy_ham_2` and `hard_ham` folders (4,150 messages).
 - **Phishing emails:** the Nazario Phishing Corpus (CC BY 4.0). We used `phishing2.mbox`, `phishing3.mbox`, `phishing-2024` and `phishing-2025` (4,586 messages). The local antivirus blocked `phishing0.mbox`, `phishing1.mbox` and `phishing-2023` when they were downloaded, so they were not used.
 - **Excluded:** SpamAssassin `spam` folders, because generic spam is not phishing.
-- **After cleaning:** 7,529 unique emails, 4,091 legitimate (54%) and 3,435 phishing (46%). 1,163 duplicates and 44 empty messages were removed.
+- **After cleaning:** 7,529 unique emails, 4,091 legitimate (54%) and 3,438 phishing (46%). 1,163 duplicates and 44 empty messages were removed.
 
 ### Data leakage found and corrected
 
@@ -59,7 +59,7 @@ The selected model made **7 false positives** (out of 818 legitimate emails) and
 | Decision | Precision | Recall | F1 | False-positive rate |
 |---|---|---|---|---|
 | ⚠ Suspicious or ✖ Likely phishing | 0.972 | 0.972 | 0.972 | 2.3% |
-| ✖ Likely phishing only | 1.000 | 0.579 | 0.733 | 0.0% |
+| ✖ Likely phishing only | 1.000 | 0.578 | 0.733 | 0.0% |
 
 **Interpretation.**
 - **The test set favours the AI.** On these corpora the AI alone scores higher than the engine.

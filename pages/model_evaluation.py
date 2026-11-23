@@ -167,23 +167,6 @@ else:
             width="stretch",
         )
     with right:
-        table = []
-        for key, label in (
-            ("engine_flagged", "Engine: ⚠ Suspicious or ✖ Likely phishing"),
-            ("engine_phishing_verdict", "Engine: ✖ Likely phishing only"),
-            ("model_only_at_0_5", "AI model alone (≥ 0.5)"),
-        ):
-            x = e[key]
-            table.append(
-                {
-                    "Decision": label,
-                    "Precision": round(x["precision"], 3),
-                    "Recall": round(x["recall"], 3),
-                    "F1": round(x["f1"], 3),
-                    "False-positive rate": f"{x['false_positive_rate']:.1%}",
-                }
-            )
-        st.dataframe(pd.DataFrame(table), hide_index=True, width="stretch")
         st.markdown(
             "**How to read this.** The engine only says *Likely phishing* when concrete "
             "indicators confirm the AI, so that verdict has very few false alarms but misses "
@@ -193,6 +176,23 @@ else:
             "shop notifications), which these corpora do not contain and on which the AI alone "
             "raises false alarms."
         )
+    table = []
+    for key, label in (
+        ("engine_flagged", "Engine: ⚠ Suspicious or ✖ Likely phishing"),
+        ("engine_phishing_verdict", "Engine: ✖ Likely phishing only"),
+        ("model_only_at_0_5", "AI model alone (probability ≥ 0.5)"),
+    ):
+        x = e[key]
+        table.append(
+            {
+                "Decision": label,
+                "Precision": f"{x['precision']:.3f}",
+                "Recall": f"{x['recall']:.3f}",
+                "F1-score": f"{x['f1']:.3f}",
+                "False-positive rate": f"{x['false_positive_rate']:.1%}",
+            }
+        )
+    st.dataframe(pd.DataFrame(table), hide_index=True, width="stretch")
     st.caption(f"Scope: {e['scope_note']} Average analysis time "
                f"{e['seconds_per_email'] * 1000:.1f} ms per email.")  # fmt: skip
 

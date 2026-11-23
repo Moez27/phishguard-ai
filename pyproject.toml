@@ -20,3 +20,5 @@ ignore = []
 [tool.ruff.lint.per-file-ignores]
 # assert is the normal idiom in pytest
 "tests/**" = ["S101"]
+# Documentation tooling runs fixed internal commands (seed script, streamlit), no user input
+"docs/build/**" = ["S603", "E501"]

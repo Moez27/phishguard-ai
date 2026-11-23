@@ -43,3 +43,7 @@ Thumbs.db
 *.db-journal
 *.db-wal
 *.db-shm
+
+# --- Documentation build ---
+docs/build/node_modules/
+docs/build/demo.db

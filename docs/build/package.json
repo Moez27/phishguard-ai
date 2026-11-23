@@ -1,0 +1,8 @@
+{
+  "name": "phishguard-docs-build",
+  "private": true,
+  "description": "Builds the Word versions of the PhishGuard AI documents",
+  "dependencies": {
+    "docx": "^9.16.0"
+  }
+}

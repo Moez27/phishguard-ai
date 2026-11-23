@@ -14,6 +14,10 @@ explainable rules.
 
 | Document | Contents |
 |---|---|
+| [docs/Rapport_PhishGuard_AI.pdf](docs/Rapport_PhishGuard_AI.pdf) ([.docx](docs/Rapport_PhishGuard_AI.docx)) | **Rapport de projet (français)**, 16 pages, with screenshots and diagrams |
+| [docs/Guide_Demonstration_PhishGuard_AI.pdf](docs/Guide_Demonstration_PhishGuard_AI.pdf) ([.docx](docs/Guide_Demonstration_PhishGuard_AI.docx)) | **Guide d'installation et de démonstration (français)**, 18 pages: how to run it, how it works, every feature with screenshots |
+| [docs/media/phishguard_demo.mp4](docs/media/phishguard_demo.mp4) | **Demonstration video**: 3 min 17 s, 1280×720, French captions |
+| [docs/screenshots/](docs/screenshots/) | Screenshots of every feature, captured from the real app |
 | [docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | Project report: choices, data, results, security, requirements traceability (F01–F09, CA1–CA8, L1–L8), limitations |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Layers, analysis flow, training pipeline, stored data (with diagrams) |
 | [docs/DEMO.md](docs/DEMO.md) | Step-by-step demonstration scenario, expected results, Q&A preparation |
@@ -170,7 +174,7 @@ actually shows. It runs on exactly the same held-out test emails and writes
 |---|---|---|---|---|
 | AI model alone (≥ 0.5) | 0.990 | 0.987 | 0.988 | 0.9% |
 | Engine: Suspicious or Likely phishing | 0.972 | 0.972 | 0.972 | 2.3% |
-| Engine: Likely phishing only | 1.000 | 0.579 | 0.733 | 0.0% |
+| Engine: Likely phishing only | 1.000 | 0.578 | 0.733 | 0.0% |
 
 On these 2002–2025 corpora the AI alone scores higher. The engine's caution, which needs concrete
 indicators before it says "Likely phishing", is designed for modern legitimate emails that the
@@ -291,3 +295,21 @@ tests/                 pytest test suite
 - The model is trained on public corpora that are partly old. Its test-set metrics measure
   performance on **those corpora**, not guaranteed real-world detection.
 - No external reputation service is queried. The URL analysis does not check blacklists.
+
+## Regenerating the documentation media
+
+The screenshots, the demo video and the French PDF and Word documents are produced by scripts.
+These scripts drive the real app in Microsoft Edge, using a separate demo database, so your history
+is never touched:
+
+```powershell
+pip install -r docs/build/requirements-docs.txt
+cd docs/build; npm install; cd ../..
+python docs/build/capture_screenshots.py   # docs/screenshots/*.png
+python docs/build/record_demo.py           # docs/media/phishguard_demo.mp4
+python docs/build/build_docs.py            # docs/*.pdf and docs/*.docx
+```
+
+The model figures in the documents are read from the training outputs, so they always match the
+current model. To edit the French text, change `docs/build/doc_content.py`, or edit the `.docx`
+files directly in Word.

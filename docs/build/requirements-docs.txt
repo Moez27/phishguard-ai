@@ -1,0 +1,7 @@
+# Tools used ONLY to regenerate the documentation media (screenshots, demo video,
+# PDF/Word documents). Not needed to run PhishGuard AI.
+# Browser: the Microsoft Edge already installed on Windows (Playwright "msedge" channel).
+# Word files: `npm install` in docs/build (docx package).
+playwright>=1.45,<2
+imageio-ffmpeg>=0.5,<1
+pymupdf>=1.24,<2
