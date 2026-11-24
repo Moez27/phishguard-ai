@@ -127,7 +127,7 @@ h3 {{ font-size: 11.5pt; color: {NAVY}; margin: 12pt 0 4pt; page-break-after: av
 p {{ margin: 0 0 7pt; text-align: justify; }}
 /* keep an introductory paragraph on the same page as the code/figure it introduces */
 p:has(+ pre), p:has(+ figure), p:has(+ table), p:has(+ ol), p:has(+ ul) {{ break-after: avoid; }}
-ul, ol {{ margin: 0 0 8pt 18pt; padding: 0; }} li {{ margin: 0 0 3pt; }}
+ul, ol {{ margin: 0 0 8pt 18pt; padding: 0; break-inside: avoid; }} li {{ margin: 0 0 3pt; }}
 code {{ font-family: Consolas, "Cascadia Mono", monospace; font-size: 9.3pt; background: #f1f5f9;
   padding: 0 3px; border-radius: 3px; }}
 pre {{ font-family: Consolas, monospace; font-size: 9pt; background: #0f172a; color: #e2e8f0;
@@ -264,11 +264,21 @@ def build_docx(doc: dict, out: Path) -> None:
     print("docx", out.relative_to(ROOT))
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Build the PDF and Word documents")
+    parser.add_argument(
+        "--only", help="build only documents whose file name contains this text (e.g. Cahier)"
+    )
+    args = parser.parse_args(argv)
+    docs = [d for d in DOCUMENTS if not args.only or args.only.lower() in d["file"].lower()]
+    if not docs:
+        sys.exit(f"No document matches --only {args.only!r}")
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="msedge", headless=True)
         render_diagrams(browser)
-        for doc in DOCUMENTS:
+        for doc in docs:
             build_pdf(browser, doc, DOCS / f"{doc['file']}.pdf")
             build_docx(doc, DOCS / f"{doc['file']}.docx")
         browser.close()

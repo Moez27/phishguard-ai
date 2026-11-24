@@ -14,6 +14,7 @@ explainable rules.
 
 | Document | Contents |
 |---|---|
+| [docs/Cahier_des_charges_PhishGuard_AI.pdf](docs/Cahier_des_charges_PhishGuard_AI.pdf) ([.docx](docs/Cahier_des_charges_PhishGuard_AI.docx)) | **Cahier des charges (français)**, 10 pages: the original specification, formatted (source: `Cahier_des_charges_PhisGuard_AI.md`) |
 | [docs/Rapport_PhishGuard_AI.pdf](docs/Rapport_PhishGuard_AI.pdf) ([.docx](docs/Rapport_PhishGuard_AI.docx)) | **Rapport de projet (français)**, 16 pages, with screenshots and diagrams |
 | [docs/Guide_Demonstration_PhishGuard_AI.pdf](docs/Guide_Demonstration_PhishGuard_AI.pdf) ([.docx](docs/Guide_Demonstration_PhishGuard_AI.docx)) | **Guide d'installation et de démonstration (français)**, 18 pages: how to run it, how it works, every feature with screenshots |
 | [docs/media/phishguard_demo.mp4](docs/media/phishguard_demo.mp4) | **Demonstration video**: 3 min 17 s, 1280×720, French captions |

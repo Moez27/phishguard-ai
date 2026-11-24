@@ -107,11 +107,13 @@ function blocks(list) {
         break;
       case "ul": case "ol": {
         listInstance += 1;
-        for (const item of b.items)
+        // keepNext on every item but the last keeps a short list on one page
+        b.items.forEach((item, idx) =>
           out.push(new Paragraph({
             numbering: { reference: b.t === "ul" ? "bullets" : "numbers", level: 0, instance: listInstance },
+            keepNext: idx < b.items.length - 1,
             spacing: { after: 60 }, children: runs(item),
-          }));
+          })));
         out.push(new Paragraph({ spacing: { after: 60 }, children: [] }));
         break;
       }
